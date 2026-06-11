@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ML Trading International Ltd — Portal Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy-deep:  #07152e;
+      --navy:       #0e2348;
+      --navy-mid:   #183a6d;
+      --navy-blue:  #24558f;
+      --blue:       #1d4ed8;
+      --blue-lt:    #2563eb;
+      --blue-soft:  #dbeafe;
+      --text-dark:  #0f172a;
+      --text-mid:   #475569;
+      --text-lo:    #71839b;
+      --border:     rgba(118, 143, 170, .28);
+      --header-grad:
+        radial-gradient(circle at 18% 20%, rgba(255,255,255,.09) 0%, transparent 32%),
+        radial-gradient(circle at 82% 8%, rgba(96,165,250,.18) 0%, transparent 40%),
+        linear-gradient(112deg, #07152e 0%, #0e2348 42%, #24558f 100%);
+      --page-grad:
+        radial-gradient(circle at 16% 8%, rgba(255,255,255,.38) 0%, transparent 32%),
+        radial-gradient(circle at 88% 16%, rgba(37,99,235,.13) 0%, transparent 36%),
+        radial-gradient(circle at 50% 100%, rgba(7,21,46,.10) 0%, transparent 42%),
+        linear-gradient(180deg,#c7d5e3 0%,#bdcedf 42%,#b2c5d8 100%);
+      --card-grad:
+        radial-gradient(circle at 18% 8%, rgba(255,255,255,.72) 0%, transparent 38%),
+        radial-gradient(circle at 85% 20%, rgba(59,130,246,.11) 0%, transparent 44%),
+        linear-gradient(180deg, rgba(245,249,253,.78) 0%, rgba(226,236,246,.72) 100%);
+      --panel-grad:
+        radial-gradient(circle at 16% 8%, rgba(255,255,255,.74) 0%, transparent 42%),
+        linear-gradient(180deg, rgba(244,248,252,.76) 0%, rgba(228,237,247,.72) 100%);
+      --shadow-sm:  0 2px 8px rgba(7,21,46,.08);
+      --shadow-md:  0 8px 24px rgba(7,21,46,.10);
+      --shadow-lg:  0 18px 44px rgba(7,21,46,.16);
+    }
+
+    html, body {
+      min-height: 100vh;
+      background: var(--page-grad);
+      font-family: 'Inter', sans-serif;
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(115deg, rgba(255,255,255,.23), transparent 34%, rgba(7,21,46,.08) 70%, transparent 100%),
+        radial-gradient(circle at 24% 18%, rgba(255,255,255,.22), transparent 34%),
+        radial-gradient(circle at 72% 34%, rgba(255,255,255,.13), transparent 38%);
+      opacity: .82;
+      z-index: -2;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px);
+      background-size: 54px 54px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,.30), transparent 72%);
+      opacity: .45;
+      z-index: -1;
+    }
+
+    /* ══ TOPBAR ══ */
+    .topbar {
+      position: sticky; top: 0; z-index: 200;
+      height: 66px;
+      background: var(--header-grad);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      box-shadow: 0 3px 18px rgba(7,21,46,.32);
+      overflow: hidden;
+    }
+
+    .topbar::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,.07) 48%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .topbar-logo {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-width: 214px;
+    }
+
+    .code-logo-mark {
+      width: 47px;
+      height: 34px;
+      position: relative;
+      flex: 0 0 47px;
+    }
+
+    .code-logo-mark .slash {
+      position: absolute;
+      display: block;
+      background: #ffffff;
+      border-radius: 2px;
+      box-shadow: 0 1px 8px rgba(255,255,255,.18);
+    }
+
+    .code-logo-mark .slash.one {
+      width: 37px;
+      height: 5px;
+      left: 0;
+      bottom: 10px;
+      transform: rotate(-38deg);
+      transform-origin: left center;
+    }
+
+    .code-logo-mark .slash.two {
+      width: 30px;
+      height: 5px;
+      left: 16px;
+      bottom: 11px;
+      transform: rotate(48deg);
+      transform-origin: left center;
+    }
+
+    .code-logo-mark .slash.three {
+      width: 22px;
+      height: 5px;
+      left: 12px;
+      bottom: 6px;
+      transform: rotate(0deg);
+    }
+
+    .code-logo-text strong {
+      display: block;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: .055em;
+    }
+
+    .code-logo-text span {
+      display: block;
+      margin-top: 4px;
+      color: rgba(255,255,255,.76);
+      font-size: 8.4px;
+      font-weight: 700;
+      letter-spacing: .22em;
+    }
+
+    .topbar-badge {
+      position: relative; z-index: 1;
+      display: flex; align-items: center; gap: 7px;
+      font-size: 11px; font-weight: 600;
+      color: #86efac;
+      background: rgba(134,239,172,.10);
+      border: 1px solid rgba(134,239,172,.25);
+      border-radius: 99px;
+      padding: 5px 14px;
+      letter-spacing: .04em;
+    }
+
+    .badge-dot {
+      width: 6px; height: 6px;
+      background: #4ade80;
+      border-radius: 50%;
+      box-shadow: 0 0 6px #4ade80;
+      animation: blink 2s infinite;
+    }
+
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+    /* ══ HERO BANNER ══ */
+    .hero {
+      background: var(--header-grad);
+      padding: 52px 48px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: inset 0 -1px 0 rgba(255,255,255,.08);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 38%, rgba(255,255,255,.08) 0%, transparent 48%),
+        radial-gradient(circle at 80% 12%, rgba(147,197,253,.13) 0%, transparent 42%),
+        linear-gradient(115deg, transparent 0%, rgba(255,255,255,.055) 48%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: block;
+      font-size: clamp(21px, 2.15vw, 29px);
+      font-weight: 680;
+      letter-spacing: -.01em;
+      text-transform: none;
+      color: #ffffff;
+      margin-bottom: 10px;
+      position: relative;
+      line-height: 1.2;
+      text-shadow: 0 2px 15px rgba(0,0,0,.15);
+    }
+
+    .hero h1 {
+      font-size: clamp(13px, 1.25vw, 17px);
+      font-weight: 500;
+      color: rgba(226,238,255,.86);
+      letter-spacing: .01em;
+      line-height: 1.5;
+      position: relative;
+    }
+
+    /* ══ PAGE WRAP ══ */
+    .wrap {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 44px 36px 52px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ══ SECTION HEADER ══ */
+    .sec-hd {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .sec-hd-label {
+      font-size: 10px; font-weight: 800;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: #61748d;
+      white-space: nowrap;
+    }
+
+    .sec-hd::after {
+      content: ''; flex: 1; height: 1px;
+      background: rgba(102,124,148,.28);
+    }
+
+    /* ══ PORTAL GRID ══ */
+    .portal-grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 16px;
+      margin-bottom: 44px;
+    }
+
+    .pcard {
+      background: var(--card-grad);
+      border: 1px solid rgba(255,255,255,.52);
+      border-radius: 15px;
+      padding: 32px 18px 26px;
+      text-align: center;
+      text-decoration: none;
+      display: block;
+      box-shadow: var(--shadow-md);
+      transition: transform .22s, box-shadow .22s, border-color .22s, background .22s;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .pcard::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,.34), transparent 44%, rgba(7,21,46,.055));
+      opacity: .9;
+      pointer-events: none;
+    }
+
+    .pcard::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--blue), #60a5fa);
+      opacity: 0;
+      transition: opacity .22s;
+    }
+
+    .pcard:hover {
+      transform: translateY(-4px);
+      border-color: rgba(191,219,254,.85);
+      box-shadow: var(--shadow-lg);
+      background:
+        radial-gradient(circle at 18% 8%, rgba(255,255,255,.78) 0%, transparent 38%),
+        linear-gradient(180deg, rgba(248,251,255,.84) 0%, rgba(218,231,244,.78) 100%);
+    }
+
+    .pcard:hover::after { opacity: 1; }
+
+    .pcard-icon,
+    .pcard-name,
+    .pcard-btn { position: relative; z-index: 1; }
+
+    .pcard-icon {
+      width: 58px; height: 58px;
+      border-radius: 14px;
+      background: rgba(219,234,254,.72);
+      border: 1px solid rgba(147,197,253,.78);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+      color: var(--blue-lt);
+      font-size: 26px;
+      transition: background .22s, transform .22s;
+    }
+
+    .pcard:hover .pcard-icon {
+      background: rgba(191,219,254,.95);
+      transform: scale(1.06);
+    }
+
+    .pcard-name {
+      font-size: 14px; font-weight: 750;
+      color: var(--text-dark);
+      margin-bottom: 14px;
+      letter-spacing: -.01em;
+    }
+
+    .pcard-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: var(--blue);
+      color: #fff;
+      padding: 7px 16px;
+      border-radius: 7px;
+      font-size: 11.5px; font-weight: 650;
+      letter-spacing: .02em;
+      box-shadow: 0 2px 8px rgba(29,78,216,.30);
+      transition: background .2s, box-shadow .2s;
+    }
+
+    .pcard:hover .pcard-btn {
+      background: #1e40af;
+      box-shadow: 0 4px 16px rgba(29,78,216,.45);
+    }
+
+    /* ══ INFO GRID ══ */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .panel {
+      background: var(--panel-grad);
+      border: 1px solid rgba(255,255,255,.52);
+      border-radius: 15px;
+      padding: 26px;
+      box-shadow: var(--shadow-md);
+      backdrop-filter: blur(10px);
+    }
+
+    .panel-hd {
+      display: flex; align-items: center; gap: 10px;
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(103,124,148,.25);
+    }
+
+    .panel-ico {
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      background: rgba(219,234,254,.72);
+      border: 1px solid rgba(147,197,253,.72);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue-lt); font-size: 17px; flex-shrink: 0;
+    }
+
+    .panel-hd h3 {
+      font-size: 13.5px; font-weight: 750;
+      color: var(--text-dark);
+    }
+
+    /* announcements */
+    .ann {
+      display: flex; gap: 12px; align-items: flex-start;
+      padding: 13px 14px;
+      background: rgba(248,250,252,.58);
+      border: 1px solid rgba(102,124,148,.22);
+      border-left: 3px solid var(--blue);
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 9px;
+    }
+
+    .ann:last-child { margin-bottom: 0; }
+
+    .ann-tag {
+      font-size: 9.5px; font-weight: 800;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--blue); display: block; margin-bottom: 4px;
+    }
+
+    .ann-text {
+      font-size: 12.5px; color: var(--text-mid); line-height: 1.6;
+    }
+
+    /* faq */
+    .faq {
+      background: rgba(248,250,252,.58);
+      border: 1px solid rgba(102,124,148,.22);
+      border-radius: 9px;
+      margin-bottom: 7px;
+      overflow: hidden;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .faq:last-child { margin-bottom: 0; }
+
+    .faq[open] {
+      border-color: rgba(147,197,253,.88);
+      box-shadow: 0 0 0 3px rgba(29,78,216,.06);
+    }
+
+    .faq summary {
+      list-style: none;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 13px 15px;
+      font-size: 13px; font-weight: 650;
+      color: var(--text-dark); cursor: pointer; user-select: none; gap: 10px;
+      background: rgba(255,255,255,.50);
+    }
+
+    .faq summary::-webkit-details-marker { display: none; }
+
+    .faq-arr {
+      font-size: 17px; color: var(--text-lo);
+      transition: transform .2s, color .2s; flex-shrink: 0;
+    }
+
+    .faq[open] summary .faq-arr { transform: rotate(180deg); color: var(--blue); }
+
+    .faq-ans {
+      padding: 12px 15px 14px;
+      font-size: 12.5px; color: var(--text-mid);
+      line-height: 1.65; border-top: 1px solid rgba(102,124,148,.22);
+    }
+
+    /* ══ FOOTER ══ */
+    .footer {
+      background: var(--header-grad);
+      border-radius: 14px;
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      box-shadow: 0 14px 36px rgba(7,21,46,.22);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 14% 22%, rgba(255,255,255,.075), transparent 34%),
+        radial-gradient(circle at 86% 8%, rgba(96,165,250,.13), transparent 38%),
+        linear-gradient(115deg, transparent 0%, rgba(255,255,255,.055) 48%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .footer > * { position: relative; z-index: 1; }
+
+    .footer-left {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; color: rgba(226,238,255,.78);
+    }
+
+    .footer-left .material-icons { font-size: 15px; color: #fbbf24; }
+
+    .footer-right {
+      font-size: 11.5px; color: rgba(226,238,255,.62);
+    }
+
+    .footer-link {
+      color: #93c5fd; text-decoration: none; font-weight: 750;
+      transition: color .2s;
+    }
+
+    .footer-link:hover { color: #fff; }
+
+    /* ══ RESPONSIVE ══ */
+    @media (max-width: 960px) {
+      .portal-grid { grid-template-columns: repeat(2,1fr); }
+      .hero { padding: 40px 28px 44px; }
+    }
+    @media (max-width: 700px) {
+      .wrap { padding: 32px 18px 40px; }
+      .topbar { padding: 0 20px; }
+      .topbar-badge { display: none; }
+      .info-grid { grid-template-columns: 1fr; }
+      .footer { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .portal-grid { grid-template-columns: 1fr; }
+      .code-logo-text strong { font-size: 13px; }
+      .code-logo-text span { font-size: 7.8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-logo" aria-label="ML Trading International Ltd">
+      <div class="code-logo-mark" aria-hidden="true">
+        <span class="slash one"></span>
+        <span class="slash two"></span>
+        <span class="slash three"></span>
+      </div>
+      <div class="code-logo-text">
+        <strong>ML TRADING</strong>
+        <span>INTERNATIONAL LTD</span>
+      </div>
+    </div>
+    <div class="topbar-badge">
+      <span class="badge-dot"></span>
+      All Systems Operational
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">Centralized Business Hub</div>
+    <h1>Choose your portal to get started</h1>
+  </div>
+
+  <!-- MAIN -->
+  <div class="wrap">
+
+    <!-- PORTALS -->
+    <div class="sec-hd"><span class="sec-hd-label">Access Portals</span></div>
+    <div class="portal-grid">
+
+      <a class="pcard" href="https://script.google.com/macros/s/AKfycby7mT2URy1w-e-Oy_USpcHKp-8ZueNayerEYukdNUI220jfA_KQFFNd1SslNFZvoe6VNg/exec?portal=admin" target="_blank">
+        <div class="pcard-icon"><span class="material-icons">admin_panel_settings</span></div>
+        <div class="pcard-name">Admin Portal</div>
+        <div class="pcard-btn"><span class="material-icons" style="font-size:12px">open_in_new</span> Access Portal</div>
+      </a>
+
+      <a class="pcard" href="https://script.google.com/macros/s/AKfycby7mT2URy1w-e-Oy_USpcHKp-8ZueNayerEYukdNUI220jfA_KQFFNd1SslNFZvoe6VNg/exec" target="_blank">
+        <div class="pcard-icon"><span class="material-icons">storefront</span></div>
+        <div class="pcard-name">Reseller Portal</div>
+        <div class="pcard-btn"><span class="material-icons" style="font-size:12px">open_in_new</span> Access Portal</div>
+      </a>
+
+      <a class="pcard" href="https://script.google.com/macros/s/AKfycby7mT2URy1w-e-Oy_USpcHKp-8ZueNayerEYukdNUI220jfA_KQFFNd1SslNFZvoe6VNg/exec?portal=finance" target="_blank">
+        <div class="pcard-icon"><span class="material-icons">account_balance</span></div>
+        <div class="pcard-name">Finance Portal</div>
+        <div class="pcard-btn"><span class="material-icons" style="font-size:12px">open_in_new</span> Access Portal</div>
+      </a>
+
+      <a class="pcard" href="https://script.google.com/macros/s/AKfycby7mT2URy1w-e-Oy_USpcHKp-8ZueNayerEYukdNUI220jfA_KQFFNd1SslNFZvoe6VNg/exec?portal=shipping" target="_blank">
+        <div class="pcard-icon"><span class="material-icons">local_shipping</span></div>
+        <div class="pcard-name">Shipping Portal</div>
+        <div class="pcard-btn"><span class="material-icons" style="font-size:12px">open_in_new</span> Access Portal</div>
+      </a>
+
+    </div>
+
+    <!-- INFO -->
+    <div class="sec-hd"><span class="sec-hd-label">Information</span></div>
+    <div class="info-grid">
+
+      <div class="panel">
+        <div class="panel-hd">
+          <div class="panel-ico"><span class="material-icons">campaign</span></div>
+          <h3>General Announcements</h3>
+        </div>
+        <div class="ann">
+          <div>
+            <span class="ann-tag">System Launch</span>
+            <p class="ann-text">This centralized portal is now live to streamline reseller orders, finance review, shipping operations, and internal business workflow.</p>
+          </div>
+        </div>
+        <div class="ann">
+          <div>
+            <span class="ann-tag">Process Improvement</span>
+            <p class="ann-text">Your feedback matters. If you notice any issue or improvement opportunity, please report it to the system admin.</p>
+          </div>
+        </div>
+        <div class="ann">
+          <div>
+            <span class="ann-tag">Security Update</span>
+            <p class="ann-text">OTP-based access is active for all portal users. Please use only your registered email address when logging in.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-hd">
+          <div class="panel-ico"><span class="material-icons">help_center</span></div>
+          <h3>Frequently Asked Questions</h3>
+        </div>
+
+        <details class="faq">
+          <summary>How do I log in? <span class="material-icons faq-arr">expand_more</span></summary>
+          <div class="faq-ans">Open your designated portal, enter your registered email, request an OTP, then verify using the code received in your inbox.</div>
+        </details>
+        <details class="faq">
+          <summary>What if my OTP is missing? <span class="material-icons faq-arr">expand_more</span></summary>
+          <div class="faq-ans">Check your inbox and spam/junk folder. If expired, click "Resend OTP" from the login screen to request a fresh code.</div>
+        </details>
+        <details class="faq">
+          <summary>Which portal should I use? <span class="material-icons faq-arr">expand_more</span></summary>
+          <div class="faq-ans">Resellers → Reseller Portal. Finance team → Finance Portal. Logistics → Shipping Portal. Management → Admin Portal.</div>
+        </details>
+        <details class="faq">
+          <summary>Can I use a different email? <span class="material-icons faq-arr">expand_more</span></summary>
+          <div class="faq-ans">No. Access only works with the registered email assigned to your role. Contact your admin to update your email if needed.</div>
+        </details>
+        <details class="faq">
+          <summary>What if a portal does not open? <span class="material-icons faq-arr">expand_more</span></summary>
+          <div class="faq-ans">Refresh the page, check your internet connection, and try again. If the issue continues, contact the system admin.</div>
+        </details>
+      </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="footer-left">
+        <span class="material-icons">lock</span>
+        <span><strong style="color:#e2e8f0">Authorized Personnel Only.</strong> &nbsp;All activities are monitored and logged.</span>
+      </div>
+      <div class="footer-right">
+        © 2026 ML Trading International Ltd. &nbsp;•&nbsp; Developed &amp; Managed by
+        <a href="https://taxexpertllc.com/" target="_blank" class="footer-link">TaxExpert LLC</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
